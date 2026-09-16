@@ -1,0 +1,28 @@
+{
+  "name": "multi-tenant-saas-demo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.4",
+    "turbo": "^2.10.13",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@10.30.2",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "esbuild",
+      "@swc/core",
+      "sharp"
+    ]
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
