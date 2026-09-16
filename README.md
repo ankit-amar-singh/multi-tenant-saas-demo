@@ -12,7 +12,7 @@ Production-style enterprise multi-tenant SaaS application demonstrating workspac
 
 ---
 
-## 🎯 What Recruiters Will See
+## 🎯 Enterprise Highlights & Architecture
 
 This repository demonstrates senior full-stack capability and enterprise software design:
 
