@@ -105,13 +105,16 @@ docker-compose up --build
 
 ---
 
-## 📖 Architecture Decision Records (ADRs)
+## 📖 Architecture Decision Records (ADRs) & Strategy Guides
 
 - [ADR 001: PostgreSQL & Prisma ORM Selection](docs/decisions/001-use-postgresql-prisma.md)
 - [ADR 002: JWT Authentication & Tenant Isolation Middleware](docs/decisions/002-jwt-auth-tenant-isolation.md)
 - [ADR 003: CASL-based Role Access Control (RBAC)](docs/decisions/003-casl-rbac-authorization.md)
+- [ADR 004: Enterprise Multi-Tenant Caching Strategy & Data Isolation](docs/decisions/004-caching-strategy-multi-tenant.md)
+- ⚡ **Comprehensive Manual**: [Multi-Tenant 6-Level Caching Strategy Guide](docs/caching-strategy.md)
 
 ---
 
 ## 📄 License
 MIT License. Created by [Ankit Kumar](https://github.com/ankit-amar-singh).
+

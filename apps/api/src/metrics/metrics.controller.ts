@@ -1,12 +1,17 @@
 import { Controller, Get, Param, Headers, NotFoundException, ForbiddenException, Inject } from '@nestjs/common';
 import { DatabaseService } from '../database.service';
+import { TenantCacheService } from '../cache/tenant-cache.service';
+import { UsageMetrics } from '@repo/types';
 
 @Controller('metrics')
 export class MetricsController {
-  constructor(@Inject(DatabaseService) private readonly db: DatabaseService) {}
+  constructor(
+    @Inject(DatabaseService) private readonly db: DatabaseService,
+    @Inject(TenantCacheService) private readonly cache: TenantCacheService
+  ) {}
 
   @Get(':slug')
-  getMetrics(@Param('slug') slug: string, @Headers('x-user-email') userEmail?: string) {
+  async getMetrics(@Param('slug') slug: string, @Headers('x-user-email') userEmail?: string): Promise<UsageMetrics & { isCached?: boolean }> {
     const email = userEmail || 'owner@skyport.io';
     const user = this.db.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
     if (!user) throw new ForbiddenException('User context invalid');
@@ -17,6 +22,22 @@ export class MetricsController {
     const membership = this.db.members.find((m) => m.workspaceId === workspace.id && m.userId === user.id);
     if (!membership) throw new ForbiddenException('Access denied to workspace metrics');
 
-    return this.db.getWorkspaceMetrics(workspace.id);
+    const cacheKey = 'metrics:summary';
+    const cachedMetrics = await this.cache.get<UsageMetrics>(workspace.id, cacheKey);
+    if (cachedMetrics) {
+      return {
+        ...cachedMetrics,
+        isCached: true,
+      };
+    }
+
+    const freshMetrics = this.db.getWorkspaceMetrics(workspace.id);
+    await this.cache.set(workspace.id, cacheKey, freshMetrics, 60000);
+
+    return {
+      ...freshMetrics,
+      isCached: false,
+    };
   }
 }
+
