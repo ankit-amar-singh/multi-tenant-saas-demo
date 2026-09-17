@@ -59,11 +59,16 @@ docs/devops-handbook/
 │   │   ├── cilium-ebpf-cni.md
 │   │   ├── ingress-controllers-nginx-traefik-envoy.md
 │   │   └── cloudflare-zero-trust-edge.md
-│   ├── 09-platform-engineering/          # Developer Portals & Internal Developer Platforms
+│   ├── 09-branching-and-release-strategies/ # Branching Models, Release Planning & Automation
+│   │   ├── 01-branching-strategies-deep-dive.md
+│   │   ├── 02-release-planning-and-deployment-patterns.md
+│   │   ├── 03-decision-framework-what-to-choose-when.md
+│   │   └── 04-automation-and-pipeline-blueprints.md
+│   ├── 10-platform-engineering/          # Developer Portals & Internal Developer Platforms
 │   │   ├── backstage-spotify-architecture.md
 │   │   ├── commercial-portals-port-mia.md
 │   │   └── internal-developer-platform-blueprints.md
-│   └── 10-decision-frameworks/           # Trade-off Matrices & Selection Trees
+│   └── 11-decision-frameworks/           # Trade-off Matrices & Selection Trees
 │       ├── iac-tool-decision-matrix.md
 │       ├── cicd-engine-selection-guide.md
 │       ├── observability-stack-decision-tree.md
@@ -90,6 +95,7 @@ docs/devops-handbook/
 | :--- | :--- | :--- | :--- | :--- |
 | **IaC** | OpenTofu, Pulumi, Ansible | HashiCorp Terraform Cloud, Pulumi SaaS | HashiCorp/IBM, Pulumi, Spacelift, Red Hat | OpenTofu for open license; Pulumi for real code; Terraform Cloud for enterprise managed state |
 | **CI/CD** | GitHub Actions (free tier), GitLab CI, Jenkins, Argo Workflows | Harness, Octopus Deploy, CircleCI SaaS | GitHub (Microsoft), GitLab, Harness, CloudBees | GitHub Actions/GitLab for integrated dev flow; Harness for AI pipeline governance |
+| **Branching & Releases** | Trunk-Based, GitHub Flow, GitFlow, SemVer | LaunchDarkly, Unleash, LaunchDarkly SaaS | LaunchDarkly, Split.io, Unleash | Trunk-Based + Feature Flags for high velocity; Release Branching + SemVer for mobile/LTS |
 | **Kubernetes** | K8s, K3s, Minikube | AWS EKS, GCP GKE, Azure AKS, Red Hat OpenShift | AWS, Google Cloud, Microsoft, Red Hat | GKE/EKS for cloud native managed control planes; OpenShift for enterprise security |
 | **GitOps** | ArgoCD, Flux CD | Codefresh (Octopus), GitLab Agent for K8s | Akuity, Codefresh, Weaveworks | ArgoCD for rich UI & ApplicationSets; Flux for lightweight modular operators |
 | **Observability** | Prometheus, Grafana, OpenTelemetry, Loki, Jaeger | Datadog, Dynatrace, New Relic, Honeycomb | Datadog, Dynatrace, New Relic, Grafana Labs | OTel + Grafana for vendor-neutral stack; Datadog/Dynatrace for full out-of-the-box SaaS |
